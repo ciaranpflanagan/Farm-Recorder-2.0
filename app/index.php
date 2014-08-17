@@ -154,8 +154,21 @@ include '../core/init.php';
                     </div>
                 </div>
                 <!-- /.row -->
-
+                <div class="col-lg-6">
                 <div class="row">
+                <div class="navbar navbar-default">
+                    <div class="container">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#">Live Animals</a>
+                                </li>
+                                <li><a href="index_deceased.php">Deceased Animals</a>
+                                </li>
+                            </ul>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+                </div>
+                </div>
                     <div class="col-lg-12">
                         <div class="table-responsive">
 <?php
@@ -173,7 +186,7 @@ $num = mysqli_num_rows($r);
 if ($num > 0) {
     
     // Displaying the number of registered users
-    echo "<p>There are currently <strong>$num</strong> animals registered!!!</p>";
+    echo "<p>There are currently <strong>$num</strong> live animals registered!!!</p>";
     
     // Table header
     echo '<table class="table table-bordered table-hover">

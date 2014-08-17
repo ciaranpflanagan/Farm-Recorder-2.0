@@ -177,7 +177,9 @@ if ($num > 0) {
     
     // Fetch and print all records
     while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-        echo '<b>Breed: </b>' . $row['b'] . '<br/>' . '<b>Dam\'s Tag Number: </b>' . $row['mtn'] . '<br/>' . '<b>Sire\'s Tag Number: </b>' . $row['rn'] . '<br/>' . '<b>Alive: </b>'; if (intval($row['alive']) === 0){ echo 'Yes';}else {echo 'No';}; echo '<br/>'; 
+        echo '<b>Breed: </b>' . $row['b'] . '<br/>' . '<b>Dam\'s Tag Number: </b>' . $row['mtn'] . '<br/>' . '<b>Sire\'s Tag Number: </b>' . $row['rn'] . '<br/>' . '<b>Alive: </b>'; if (intval($row['alive']) === 0){ echo 'Yes';}else {echo 'No';}; echo '<br/>';
+
+        echo '<br/><b>Animal\'s Note: </b>' . $row['n'] . '<br/>'; 
     }
     
     echo '</tbody></table>'; // Closing the table

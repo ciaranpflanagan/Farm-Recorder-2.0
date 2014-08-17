@@ -75,10 +75,10 @@ include '../core/init.php';
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i> Tag Number <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tag Number <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                            <form action="register.php" method="post" role="form">
-
+                            <form action="register.php" method="post" role="form" style="float: left;">
+<i><h4>Add A New Tag</h4></i>
                             <div class="form-group">
                                 <label>Animal's Number</label>
                                 <input type="number" class="form-control" name="tag_number" maxlength="10">
@@ -94,6 +94,16 @@ include '../core/init.php';
                                 <br/>
                             <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
                             <button type="reset" class="btn btn-primary">Reset Button</button>
+
+                        </form>
+                        <form action="remove.php" method="post" role="form" style="float: right;">
+<i><h4>Mark As Deceased</h4></i>
+                            <div class="form-group">
+                                <label>Animal's Number</label>
+                                <input type="number" class="form-control" name="tag_number" maxlength="10">
+                            </div>
+                                <br/>
+                            <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
 
                         </form>
                     </ul>
@@ -139,36 +149,81 @@ include '../core/init.php';
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Development Logs <small>Fixed and Know Bugs</small>
+                            Dashboard <small>Your Tag Numbers</small>
                         </h1>
                     </div>
                 </div>
                 <!-- /.row -->
-
+                <div class="col-lg-6">
                 <div class="row">
-                <h4>Know Bugs</h4>
-                <p>
-                    <ul>
-                        <li>Note gets replace when form filled out again.</li>
-                    </ul>
-                </p>
-<br/>
-                <h4>Fixed Bugs</h4>
-                <p>
-                    <ul>
-                        <li></li>
-                    </ul>
-                </p>
-<br/>
-                <h4>Added Features</h4>
-                <p>
-                    <ul>
-                        <li>Added "Mark As Deceased" Feature</li>
-                        <li>Added Profile Feature</li>
-                        <li>Added The Ablity to Switch Between Live and Deceased Animals Tables</li>
-                    </ul>
-                </p>
-<br/>
+                <div class="navbar navbar-default">
+                    <div class="container">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.php">Live Animals</a>
+                                </li>
+                                <li class="active"><a>Deceased Animals</a>
+                                </li>
+                            </ul>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+                </div>
+                </div>
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+<?php
+require ('../core/database/animal_connect.php'); // Connecting to the database
+$id = $_SESSION['user_id'];
+
+// Making the query
+$q = "SELECT CONCAT(tag_number) AS tn, CONCAT(mother_tag_number) AS mtn, CONCAT(ram_number) AS rn, CONCAT(note) AS n FROM test_1234 WHERE `user_id` = $id AND `dead` = '1' ORDER BY tag_number ASC";
+$r = @mysqli_query($dbc, $q); // Running the query
+
+//
+$num = mysqli_num_rows($r);
+
+// If it ran OK, display records
+if ($num > 0) {
+    
+    // Displaying the number of registered users
+    echo "<p>There are currently <strong>$num</strong> deceased animals registered!!!</p>";
+    
+    // Table header
+    echo '<table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tag Number</th>
+                                        <th>Dam\'s Tag Number</th>
+                                        <th>Sire\'s Tag Number</th>
+                                        <th>Animal\'s Note</th>
+                                    </tr>
+                                </thead>';
+    
+    // Fetch and print all records
+    while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+        echo '<tr><td><a href="profile.php?tag_number=' . $row['tn'] . '">' . $row['tn'] . '</td><td><a href="profile.php?tag_number=' . $row['mtn'] . '">' . $row['mtn'] . '</td><td><a href="profile.php?tag_number=' . $row['rn'] . '">' . $row['rn'] . '</td><td>' . $row['n'] . '</td></tr>';
+    }
+    
+    echo '</tbody></table>'; // Closing the table
+
+// Will add this later
+//include ('tag_color_display.php');
+    
+    mysqli_free_result ($r); // Freeing up resources
+}
+// If it didn't run OK
+else
+{
+    // Public message
+    echo '<p>We can\'t display your animals because you haven\'t registered any. You can register an animal <a href="register.php">here</a>.</p>';
+    
+    // Debugging message
+    // echo '<p>' . mysqli_error($dbc) . '<br/><br/>Query: ' . $q . '</p>';
+} // End of ($r) if statement
+
+mysqli_close($dbc); // Closing the database connection
+
+?>
                         </div>
                     </div>
                 </div>
