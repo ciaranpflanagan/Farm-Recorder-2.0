@@ -188,7 +188,7 @@ if ($num > 0) {
     
     // Fetch and print all records
     while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-        echo '<tr><td>' . $row['tn'] . '</td><td>' . $row['mtn'] . '</td><td>' . $row['rn'] . '</td><td>' . $row['n'] . '</td></tr>';
+        echo '<tr><td><a href="profile.php?tag_number=' . $row['tn'] . '">' . $row['tn'] . '</td><td><a href="profile.php?tag_number=' . $row['mtn'] . '">' . $row['mtn'] . '</td><td><a href="profile.php?tag_number=' . $row['rn'] . '">' . $row['rn'] . '</td><td>' . $row['n'] . '</td></tr>';
     }
     
     echo '</tbody></table>'; // Closing the table
