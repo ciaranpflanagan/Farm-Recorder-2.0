@@ -206,8 +206,6 @@ if ($num > 0) {
     
     echo '</tbody></table>'; // Closing the table
 
-// Will add this later
-//include ('tag_color_display.php');
     
     mysqli_free_result ($r); // Freeing up resources
 }

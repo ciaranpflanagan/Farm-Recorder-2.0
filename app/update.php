@@ -50,10 +50,64 @@ include '../core/init.php';
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Farm Recorder</a>
+                <a class="navbar-brand" href="index.php">Farm Recorder</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i> Note <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                            <form action="note.php" method="post" role="form">
+
+                            <div class="form-group">
+                                <label>Animal's Number</label>
+                                <input type="number" class="form-control" name="tag_number" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Note</label>
+                                <textarea class="form-control" name="note" maxlength="100"></textarea>
+                            </div>
+                                <br/>
+                            <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
+                            <button type="reset" class="btn btn-primary">Reset Button</button>
+
+                        </form>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tag Number <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                            <form action="register.php" method="post" role="form" style="float: left;">
+<i><h4>Add A New Tag</h4></i>
+                            <div class="form-group">
+                                <label>Animal's Number</label>
+                                <input type="number" class="form-control" name="tag_number" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Dam's Number</label>
+                                <input type="number" class="form-control" name="mother_tag_number" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Sire's Number</label>
+                                <input type="number" class="form-control" name="ram_number" maxlength="10">
+                            </div>
+                                <br/>
+                            <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
+                            <button type="reset" class="btn btn-primary">Reset Button</button>
+
+                        </form>
+                        <form action="remove.php" method="post" role="form" style="float: right;">
+<i><h4>Mark As Deceased</h4></i>
+                            <div class="form-group">
+                                <label>Animal's Number</label>
+                                <input type="number" class="form-control" name="tag_number" maxlength="10">
+                            </div>
+                                <br/>
+                            <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
+
+                        </form>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo ucfirst($_SESSION['username']);?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">

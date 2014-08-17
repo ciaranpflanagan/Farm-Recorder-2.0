@@ -50,7 +50,7 @@ include '../core/init.php';
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Farm Recorder</a>
+                <a class="navbar-brand" href="index.php">Farm Recorder</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -75,10 +75,10 @@ include '../core/init.php';
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i> Tag Number <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tag Number <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                            <form action="register.php" method="post" role="form">
-
+                            <form action="register.php" method="post" role="form" style="float: left;">
+<i><h4>Add A New Tag</h4></i>
                             <div class="form-group">
                                 <label>Animal's Number</label>
                                 <input type="number" class="form-control" name="tag_number" maxlength="10">
@@ -94,6 +94,16 @@ include '../core/init.php';
                                 <br/>
                             <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
                             <button type="reset" class="btn btn-primary">Reset Button</button>
+
+                        </form>
+                        <form action="remove.php" method="post" role="form" style="float: right;">
+<i><h4>Mark As Deceased</h4></i>
+                            <div class="form-group">
+                                <label>Animal's Number</label>
+                                <input type="number" class="form-control" name="tag_number" maxlength="10">
+                            </div>
+                                <br/>
+                            <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
 
                         </form>
                     </ul>

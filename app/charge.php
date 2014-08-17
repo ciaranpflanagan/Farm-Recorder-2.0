@@ -56,7 +56,7 @@ $id = $_SESSION['user_id'];
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                 <li class="dropdown">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i> Note <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                             <form action="note.php" method="post" role="form">
@@ -77,10 +77,10 @@ $id = $_SESSION['user_id'];
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i> Tag Number <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tag Number <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                            <form action="register.php" method="post" role="form">
-
+                            <form action="register.php" method="post" role="form" style="float: left;">
+<i><h4>Add A New Tag</h4></i>
                             <div class="form-group">
                                 <label>Animal's Number</label>
                                 <input type="number" class="form-control" name="tag_number" maxlength="10">
@@ -96,6 +96,16 @@ $id = $_SESSION['user_id'];
                                 <br/>
                             <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
                             <button type="reset" class="btn btn-primary">Reset Button</button>
+
+                        </form>
+                        <form action="remove.php" method="post" role="form" style="float: right;">
+<i><h4>Mark As Deceased</h4></i>
+                            <div class="form-group">
+                                <label>Animal's Number</label>
+                                <input type="number" class="form-control" name="tag_number" maxlength="10">
+                            </div>
+                                <br/>
+                            <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
 
                         </form>
                     </ul>
