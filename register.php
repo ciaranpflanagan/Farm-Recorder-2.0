@@ -66,7 +66,7 @@ else if (empty($errors) === false) {
 <body>
 <section class="container">
     <div class="login">
-      <h1>Login to Web App</h1>
+      <h1>Register For Farm Recorder</h1>
       <form action="" method="post">
         <p><input type="text" name="username" value="" placeholder="Username"></p>
         <p><input type="text" name="first_name" value="" placeholder="First Name"></p>
@@ -80,18 +80,10 @@ else if (empty($errors) === false) {
 
     <div class="login-help">
       <p>Have an account? <a href="index.php">Click here to sign in</a>.</p>
-      <p>Forgot your password? <a href="change_password.php">Click here to reset it</a>.</p>
     </div>
   </section>
 
   <section class="about">
-    <p class="about-links">
-      <a href="http://www.cssflow.com/snippets/login-form" target="_parent">View Article</a>
-      <a href="http://www.cssflow.com/snippets/login-form.zip" target="_parent">Download</a>
-    </p>
-    <p class="about-author">
-      &copy; 2012&ndash;2013 <a href="http://thibaut.me" target="_blank">Thibaut Courouble</a> -
-      <a href="http://www.cssflow.com/mit-license" target="_blank">MIT License</a><br>
-      Original PSD by <a href="http://www.premiumpixels.com/freebies/clean-simple-login-form-psd/" target="_blank">Orman Clark</a>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Farm Recorder</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://farmrecorder.cicisoft.net/" property="cc:attributionName" rel="cc:attributionURL">Ciaran Flanagan</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
   </section>
 <?php } ?>

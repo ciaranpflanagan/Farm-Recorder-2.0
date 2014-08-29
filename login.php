@@ -15,13 +15,12 @@ if (empty($_POST) === false){
 		$errors[] = 'This username isn\'t registered in our database. Have you registered?';
 	}
 	else if (user_active($username) === false) {
-		$errors[] = 'You haven\'t activated your account!!!';
+		$errors[] = 'You haven\'t activated your account';
 	}
 	else {
 		$login = login($username, $password);
-		$email = email($username);
 		if ($login === false) {
-			$errors[] = 'That username or password is inncorect!!!';
+			$errors[] = 'That username or password is inncorect';
 		}
 		else { 
 			$_SESSION['user_id'] = $login;
@@ -36,14 +35,13 @@ if (empty($_POST) === false){
 	$errors[] = 'Not Data';
 }
 
-include 'includes/overall/header.php';
 
 if (empty($errors) === false) {
 ?>
-	<h2>We tried to log you in but we encounterd the following problems,</h2>
 <?php
+include 'includes/widgets/wrong.php';
 echo output_errors($errors);
+include 'includes/widgets/wrong_second.php';
 }
 
-include 'includes/overall/footer.php';
 ?>
