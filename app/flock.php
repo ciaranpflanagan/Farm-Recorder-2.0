@@ -1,6 +1,7 @@
 <?php 
 $page_title = "Home | Farm Recorder | Making Farm Managment Easy";
 include '../core/init.php';
+$flock_number = $_GET['number'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -172,89 +173,89 @@ include '../core/init.php';
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Dashboard <small>Your Tag Numbers</small>
+                            Dashboard <small>Your Flocks</small>
                         </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
-                            </li>
-                        </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-
-
-              <div class="row">
-                    <div class="col-lg-6">
+                <div class="col-lg-6">
+                <div class="row">
+                <div class="navbar navbar-default">
+                    <div class="container">
+                            <ul class="nav navbar-nav">
+                                <li><a href="flocks.php">Flock 1</a>
+                                </li>
+                                <li><a href="flock.php?number=2">Flock 2</a>
+                                </li>
+                                <li><a href="flock.php?number=3">Flock 3</a>
+                                </li>
+                                <li><a href="flock.php?number=4">Flock 4</a>
+                                </li>
+                                <li><a href="flock.php?number=5">Flock 5</a>
+                                </li>
+                            </ul>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+                </div>
+                </div>
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
 <?php
+require ('../core/database/animal_connect.php'); // Connecting to the database
+$id = $_SESSION['user_id'];
 
-// Checking for form submissions
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Making the query
+$q = "SELECT CONCAT(tag_number) AS tn, CONCAT(mother_tag_number) AS mtn, CONCAT(ram_number) AS rn, CONCAT(note) AS n FROM test_1234 WHERE `user_id` = $id AND `flock_number` = '$flock_number' AND `dead` = '0' ORDER BY tag_number ASC";
+$r = @mysqli_query($dbc, $q); // Running the query
+
+//
+$num = mysqli_num_rows($r);
+
+// If it ran OK, display records
+if ($num > 0) {
     
-    require ('../core/database/animal_connect.php'); // Connecting to the database
+    // Displaying the number of registered users
+    echo "<p>You have <strong>$num</strong> animal in this flock.</p>";
     
-    $errors = array(); // Initializing an error array
-
-    // Checking for tag number
-    if (empty($_POST['tag_number'])) {
-        $errors[] = 'You forgot to enter your a tag number!';
-    }
-    else
-    {
-        $tn = mysqli_real_escape_string($dbc, trim($_POST['tag_number']));
-    }
-
-    // Checking for mother's tag number
-    if (empty($_POST['note'])) {
-        $errors[] = 'You forgot to enter a note!';
-    }
-    else
-    {
-        $n = mysqli_real_escape_string($dbc, trim($_POST['note']));
-    }
-
-    $id = $_SESSION['user_id'];
+    // Table header
+    echo '<table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tag Number</th>
+                                        <th>Dam\'s Tag Number</th>
+                                        <th>Sire\'s Tag Number</th>
+                                        <th>Animal\'s Note</th>
+                                    </tr>
+                                </thead>';
     
-// If everything is OK
-if (empty($errors)) {
-    // Registering user into database    
-    // Making the query
-    $q = "UPDATE `test_1234` SET `note` = '$n' WHERE `user_id` = '$id' AND `tag_number` = '$tn';";
-    $r = @mysqli_query ($dbc, $q); // Run the query
-    // If it ran OK
-    if ($r) {
-    header("Location: index.php");        
+    // Fetch and print all records
+    while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+        echo '<tr><td><a href="profile.php?tag_number=' . $row['tn'] . '">' . $row['tn'] . '</td><td><a href="profile.php?tag_number=' . $row['mtn'] . '">' . $row['mtn'] . '</td><td><a href="profile.php?tag_number=' . $row['rn'] . '">' . $row['rn'] . '</td><td>' . $row['n'] . '</td></tr>';
+    }
+    
+    echo '</tbody></table>'; // Closing the table
+
+    
+    mysqli_free_result ($r); // Freeing up resources
 }
-    // If it didn't run OK
-    else
-    {
-        // Printing a message
-        echo '<h1>System Error</h1>
-        <p>You could not be registered in our database due to a system error. We\'ll look into it. Sorry for any inconvenience.</p>';
-        
-        // Debugging message
-        echo '<p>' . mysqli_error($dbc) . '<br/><br/>Query: ' . $q . '</p>';
-    } // End of ($r) if statement
-    mysqli_close($dbc); // Closing the database connection
-    
-    exit();
-}
-// Reporting the Errors
+// If it didn't run OK
 else
 {
-    echo '<h1>Error!!!</h1>
-    <p>The following error(s) have occurred:<br/>';
-    foreach ($errors as $msg) {
-        echo " - $msg<br/>\n";
-    }
-    echo '</p><p>Please try again. Thank You.</p><p><br/></p>';
-} // End of (empty($errors)) if statement
-    mysqli_close($dbc); // Closing the database connection
-}
+    // Public message
+    echo '<p>We can\'t display your animals because you haven\'t put any in this flock.</p>';
+    
+    // Debugging message
+    // echo '<p>' . mysqli_error($dbc) . '<br/><br/>Query: ' . $q . '</p>';
+} // End of ($r) if statement
+
+mysqli_close($dbc); // Closing the database connection
+
 ?>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.row -->
-
 
             </div>
             <!-- /.container-fluid -->

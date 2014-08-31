@@ -60,7 +60,7 @@ $id = $_SESSION['user_id'];
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i> Note <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                             <form action="note.php" method="post" role="form">
-
+<center><i><h4>Add A Note About An Animal</h4></i></center>
                             <div class="form-group">
                                 <label>Animal's Number</label>
                                 <input type="number" class="form-control" name="tag_number" maxlength="10">
@@ -68,6 +68,26 @@ $id = $_SESSION['user_id'];
                             <div class="form-group">
                                 <label>Note</label>
                                 <textarea class="form-control" name="note" maxlength="100"></textarea>
+                            </div>
+                                <br/>
+                            <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
+                            <button type="reset" class="btn btn-primary">Reset Button</button>
+
+                        </form>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Flock <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                            <form action="flock_number.php" method="post" role="form">
+<center><i><h4>Add An Animal To A Flock</h4></i></center>
+                            <div class="form-group">
+                                <label>Animal's Number</label>
+                                <input type="number" class="form-control" name="tag_number" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Flock Number</label>
+                                <input type="number" class="form-control" name="flock_number" maxlength="10">
                             </div>
                                 <br/>
                             <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
@@ -128,6 +148,9 @@ $id = $_SESSION['user_id'];
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="flocks.php"><i class="fa fa-fw fa-group"></i> Flocks</a>
                     </li>
                     <li>
                         <a href="contact.php"><i class="fa fa-fw fa-phone"></i> Bug Reporter</a>

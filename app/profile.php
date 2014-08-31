@@ -58,7 +58,7 @@ include '../core/init.php';
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i> Note <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                             <form action="note.php" method="post" role="form">
-
+<center><i><h4>Add A Note About An Animal</h4></i></center>
                             <div class="form-group">
                                 <label>Animal's Number</label>
                                 <input type="number" class="form-control" name="tag_number" maxlength="10">
@@ -66,6 +66,26 @@ include '../core/init.php';
                             <div class="form-group">
                                 <label>Note</label>
                                 <textarea class="form-control" name="note" maxlength="100"></textarea>
+                            </div>
+                                <br/>
+                            <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
+                            <button type="reset" class="btn btn-primary">Reset Button</button>
+
+                        </form>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Flock <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                            <form action="flock_number.php" method="post" role="form">
+<center><i><h4>Add An Animal To A Flock</h4></i></center>
+                            <div class="form-group">
+                                <label>Animal's Number</label>
+                                <input type="number" class="form-control" name="tag_number" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Flock Number</label>
+                                <input type="number" class="form-control" name="flock_number" maxlength="10">
                             </div>
                                 <br/>
                             <button type="submit" class="btn btn-primary">Submit Button</button><br/><br/>
@@ -128,6 +148,9 @@ include '../core/init.php';
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
+                        <a href="flocks.php"><i class="fa fa-fw fa-group"></i> Flocks</a>
+                    </li>
+                    <li>
                         <a href="contact.php"><i class="fa fa-fw fa-phone"></i> Bug Reporter</a>
                     </li>
                     <li>
@@ -149,7 +172,7 @@ include '../core/init.php';
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Profile <small><?php echo $_GET['tag_number']?>'s Profile</small>
+                            Profile <small><?php echo $_GET['tag_number'];?>'s Profile</small>
                         </h1>
                     </div>
                 </div>
@@ -177,6 +200,14 @@ if ($num > 0) {
     
     // Fetch and print all records
     while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+
+if ($row['b'] === "") {
+    $row['b'] = "N/A | <a href=\"index.php\">+ Add A Breed</a>";
+}
+if ($row['n'] === "" or empty($row['n'])) {
+    $row['n'] = "N/A | <a href=\"#dropdown-menu\">+ Add A Note</a>";
+}
+
         echo '<b>Breed: </b>' . $row['b'] . '<br/>' . '<b>Dam\'s Tag Number: </b>' . $row['mtn'] . '<br/>' . '<b>Sire\'s Tag Number: </b>' . $row['rn'] . '<br/>' . '<b>Alive: </b>'; if (intval($row['alive']) === 0){ echo 'Yes';}else {echo 'No';}; echo '<br/>';
 
         echo '<br/><b>Animal\'s Note: </b>' . $row['n'] . '<br/>'; 

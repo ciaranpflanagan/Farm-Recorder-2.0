@@ -204,13 +204,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tn = mysqli_real_escape_string($dbc, trim($_POST['tag_number']));
     }
 
-    // Checking for mother's tag number
-    if (empty($_POST['note'])) {
-        $errors[] = 'You forgot to enter a note!';
+    // Checking for a flock number
+    if (empty($_POST['flock_number'])) {
+        $errors[] = 'You forgot to enter a flock number!';
     }
     else
     {
-        $n = mysqli_real_escape_string($dbc, trim($_POST['note']));
+        $fn = mysqli_real_escape_string($dbc, trim($_POST['flock_number']));
     }
 
     $id = $_SESSION['user_id'];
@@ -219,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if (empty($errors)) {
     // Registering user into database    
     // Making the query
-    $q = "UPDATE `test_1234` SET `note` = '$n' WHERE `user_id` = '$id' AND `tag_number` = '$tn';";
+    $q = "UPDATE test_1234 SET `flock_number` = '$fn' WHERE `tag_number` = $tn AND `user_id` = $id;";
     $r = @mysqli_query ($dbc, $q); // Run the query
     // If it ran OK
     if ($r) {
