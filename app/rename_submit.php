@@ -1,6 +1,7 @@
 <?php 
 $page_title = "Home | Farm Recorder | Making Farm Managment Easy";
 include '../core/init.php';
+$id = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -196,30 +197,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = array(); // Initializing an error array
 
     // Checking for tag number
-    if (empty($_POST['tag_number'])) {
-        $errors[] = 'You forgot to enter your a tag number!';
+    if (empty($_POST['old_name'])) {
+        $errors[] = 'You forgot to enter a new name for your flock!';
     }
     else
     {
-        $tn = mysqli_real_escape_string($dbc, trim($_POST['tag_number']));
+        $on = mysqli_real_escape_string($dbc, trim($_POST['old_name']));
     }
+if (empty($errors)) {
+    // Registering user into database    
+    // Making the query
+    $q1 = "SELECT CONCAT(flock_number) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_name` = '$on';";
+    $r1 = @mysqli_query ($dbc, $q1); // Run the query
 
-    // Checking for a flock number
-    if (empty($_POST['flock_number'])) {
-        $errors[] = 'You forgot to enter a flock number!';
+while ($row = mysqli_fetch_array($r1, MYSQLI_ASSOC)) {
+    $flock_number = $row['fn'];
+};
+
+    // Checking for tag number
+    if (empty($_POST['flock'])) {
+        $errors[] = 'You forgot to enter a new name for your flock!';
     }
     else
     {
-        $fn = mysqli_real_escape_string($dbc, trim($_POST['flock_number']));
+        $f = mysqli_real_escape_string($dbc, trim($_POST['flock']));
     }
-
-    $id = $_SESSION['user_id'];
     
 // If everything is OK
 if (empty($errors)) {
     // Registering user into database    
     // Making the query
-    $q = "UPDATE test_1234 SET `flock_number` = '$fn' WHERE `tag_number` = $tn AND `user_id` = $id;";
+    $q = "UPDATE `flock` SET `flock_name` = '$f' WHERE `flock_number` = '$flock_number' AND `user_id` = '$id';";
     $r = @mysqli_query ($dbc, $q); // Run the query
     // If it ran OK
     if ($r) {
@@ -250,7 +258,7 @@ else
     echo '</p><p>Please try again. Thank You.</p><p><br/></p>';
 } // End of (empty($errors)) if statement
     mysqli_close($dbc); // Closing the database connection
-}
+}}
 ?>
                 </div>
                 <!-- /.row -->

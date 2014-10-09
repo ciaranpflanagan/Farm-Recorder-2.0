@@ -1,7 +1,26 @@
-<?php 
+<?php
+error_reporting(0);
 $page_title = "Home | Farm Recorder | Making Farm Managment Easy";
 include '../core/init.php';
-$flock_number = $_GET['number'];
+$id = $_SESSION['user_id'];
+require ('../core/database/animal_connect.php'); // Connecting to the database
+
+    // Registering user into database    
+    // Making the query
+    $q = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '1';";
+    $r = @mysqli_query ($dbc, $q); // Run the query
+
+    $q2 = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '2';";
+    $r2 = @mysqli_query ($dbc, $q2); // Run the query
+
+    $q3 = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '3';";
+    $r3 = @mysqli_query ($dbc, $q3); // Run the query
+
+    $q4 = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '4';";
+    $r4 = @mysqli_query ($dbc, $q4); // Run the query
+
+    $q5 = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '5';";
+    $r5 = @mysqli_query ($dbc, $q5); // Run the query
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -179,81 +198,14 @@ $flock_number = $_GET['number'];
                 </div>
                 <!-- /.row -->
                 <div class="col-lg-6">
-                <div class="row">
-                <div class="navbar navbar-default">
-                    <div class="container">
-                            <ul class="nav navbar-nav">
-                                <li><a href="flocks.php">Flock 1</a>
-                                </li>
-                                <li><a href="flock.php?number=2">Flock 2</a>
-                                </li>
-                                <li><a href="flock.php?number=3">Flock 3</a>
-                                </li>
-                                <li><a href="flock.php?number=4">Flock 4</a>
-                                </li>
-                                <li><a href="flock.php?number=5">Flock 5</a>
-                                </li>
-                            </ul>
-                        <!--/.nav-collapse -->
-                    </div>
-                </div>
-                </div>
-                </div>
-                    <div class="col-lg-12">
-                        <div class="table-responsive">
 <?php
-require ('../core/database/animal_connect.php'); // Connecting to the database
-$id = $_SESSION['user_id'];
-
-// Making the query
-$q = "SELECT CONCAT(tag_number) AS tn, CONCAT(mother_tag_number) AS mtn, CONCAT(ram_number) AS rn, CONCAT(note) AS n FROM test_1234 WHERE `user_id` = $id AND `flock_number` = '$flock_number' AND `dead` = '0' ORDER BY tag_number ASC";
-$r = @mysqli_query($dbc, $q); // Running the query
-
-//
-$num = mysqli_num_rows($r);
-
-// If it ran OK, display records
-if ($num > 0) {
-    
-    // Displaying the number of registered users
-    echo "<p>You have <strong>$num</strong> animal in this flock.</p>";
-    
-    // Table header
-    echo '<table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Tag Number</th>
-                                        <th>Dam\'s Tag Number</th>
-                                        <th>Sire\'s Tag Number</th>
-                                        <th>Animal\'s Note</th>
-                                    </tr>
-                                </thead>';
-    
-    // Fetch and print all records
-    while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-        echo '<tr><td><a href="profile.php?tag_number=' . $row['tn'] . '">' . $row['tn'] . '</td><td><a href="profile.php?tag_number=' . $row['mtn'] . '">' . $row['mtn'] . '</td><td><a href="profile.php?tag_number=' . $row['rn'] . '">' . $row['rn'] . '</td><td>' . $row['n'] . '</td></tr>';
-    }
-    
-    echo '</tbody></table>'; // Closing the table
-
-    
-    mysqli_free_result ($r); // Freeing up resources
+if (isset($_GET['rename'])) {
+    include ('includes/rename.php');
 }
-// If it didn't run OK
-else
-{
-    // Public message
-    echo '<p>We can\'t display your animals because you haven\'t put any in this flock.</p>';
-    
-    // Debugging message
-    // echo '<p>' . mysqli_error($dbc) . '<br/><br/>Query: ' . $q . '</p>';
-} // End of ($r) if statement
-
-mysqli_close($dbc); // Closing the database connection
-
+else {
+    include ('includes/flock.php');
+}
 ?>
-                        </div>
-                    </div>
                 </div>
                 <!-- /.row -->
 

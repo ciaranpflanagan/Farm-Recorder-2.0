@@ -1,6 +1,26 @@
-<?php 
+<?php
+error_reporting(0);
 $page_title = "Home | Farm Recorder | Making Farm Managment Easy";
 include '../core/init.php';
+$id = $_SESSION['user_id'];
+require ('../core/database/animal_connect.php'); // Connecting to the database
+
+    // Registering user into database    
+    // Making the query
+    $q = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '1';";
+    $r = @mysqli_query ($dbc, $q); // Run the query
+
+    $q2 = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '2';";
+    $r2 = @mysqli_query ($dbc, $q2); // Run the query
+
+    $q3 = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '3';";
+    $r3 = @mysqli_query ($dbc, $q3); // Run the query
+
+    $q4 = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '4';";
+    $r4 = @mysqli_query ($dbc, $q4); // Run the query
+
+    $q5 = "SELECT CONCAT(flock_name) AS fn FROM flock WHERE `user_id` = '$id' AND `flock_number` = '5';";
+    $r5 = @mysqli_query ($dbc, $q5); // Run the query
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -182,15 +202,36 @@ include '../core/init.php';
                 <div class="navbar navbar-default">
                     <div class="container">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="#">Flock 1</a>
+                                <li><a href="#"><?php 
+while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+    echo $row['fn'];
+};?></a>
                                 </li>
-                                <li><a href="flock.php?number=2">Flock 2</a>
+                                <li><a href="flock.php?number=2"><?php 
+while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
+    echo $row2['fn'];
+};?></a>
                                 </li>
-                                <li><a href="flock.php?number=3">Flock 3</a>
+                                <li><a href="flock.php?number=3"><?php 
+while ($row3 = mysqli_fetch_array($r3, MYSQLI_ASSOC)) {
+    echo $row3['fn'];
+};?></a>
                                 </li>
-                                <li><a href="flock.php?number=4">Flock 4</a>
+                                <li><a href="flock.php?number=4"><?php 
+while ($row4 = mysqli_fetch_array($r4, MYSQLI_ASSOC)) {
+    echo $row4['fn'];
+};?></a>
                                 </li>
-                                <li><a href="flock.php?number=5">Flock 5</a>
+                                <li><a href="flock.php?number=5"><?php 
+while ($row5 = mysqli_fetch_array($r5, MYSQLI_ASSOC)) {
+    echo $row5['fn'];
+};?></a>
+                                </li>
+                                <li>
+                                </li>
+                                <li>
+                                </li>
+                                <li  class="active"><a href="flock.php?rename=1">Rename Flocks</a>
                                 </li>
                             </ul>
                         <!--/.nav-collapse -->
@@ -201,8 +242,6 @@ include '../core/init.php';
                     <div class="col-lg-12">
                         <div class="table-responsive">
 <?php
-require ('../core/database/animal_connect.php'); // Connecting to the database
-$id = $_SESSION['user_id'];
 
 // Making the query
 $q = "SELECT CONCAT(tag_number) AS tn, CONCAT(mother_tag_number) AS mtn, CONCAT(ram_number) AS rn, CONCAT(note) AS n FROM test_1234 WHERE `user_id` = $id AND `flock_number` = '1' AND `dead` = '0' ORDER BY tag_number ASC";

@@ -135,7 +135,7 @@ else {
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Easy To Use Table<br>Design</h2>
+                    <h2 class="section-heading">5 Flocks For<br>Your Animals</h2>
                     <p class="lead">With Farm Recorder viewing your tag numbers is really easy. With helpful tips you'll never get lost.</p>
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
