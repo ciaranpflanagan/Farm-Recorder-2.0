@@ -1,8 +1,11 @@
 <?php 
+error_reporting(0);
 $page_title = "Home | Farm Recorder | Making Farm Managment Easy";
 include '../core/init.php';
-require ('../core/database/connect.php'); // Connecting to the database
 $id = $_SESSION['user_id'];
+require '../core/database/connect.php';
+require '../core/database/connect_free.php';
+require '../core/database/animal_connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -138,6 +141,20 @@ $id = $_SESSION['user_id'];
                         </li>
                         <li class="divider"></li>
                         <li>
+                            <a href="index.phps"><i class="fa fa-fw fa-credit-card"></i> Paid Member: 
+<?php
+include 'free.php';
+if (intval($free) === 1) {
+    echo 'Yes';
+}
+else {
+    echo 'No';
+}
+?>
+                             </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
                             <a href="../log_out.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
@@ -191,14 +208,21 @@ $id = $_SESSION['user_id'];
       'card'  => $token
   ));
 
+try {
   $charge = Stripe_Charge::create(array(
       'customer' => $customer->id,
-      'amount'   => 2000,
+      'amount'   => 200,
       'currency' => 'eur'
   ));
 
-header("Location: update.php");
+$q_stripe = "UPDATE `users` SET `free` = '1' WHERE `user_id` = '$id';";
+$r_stripe = @mysqli_query ($dbc, $q_stripe); // Run the query
 
+}catch(Stripe_CardError $e) {
+    // DO somethign
+}
+header("Location: index.php");
+exit();
 
 ?>
                 </div>

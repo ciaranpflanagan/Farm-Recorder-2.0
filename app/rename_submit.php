@@ -1,7 +1,11 @@
-<?php 
+<?php
+error_reporting(0);
 $page_title = "Home | Farm Recorder | Making Farm Managment Easy";
 include '../core/init.php';
 $id = $_SESSION['user_id'];
+require '../core/database/connect.php';
+require '../core/database/connect_free.php';
+require '../core/database/animal_connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,6 +141,20 @@ $id = $_SESSION['user_id'];
                         </li>
                         <li class="divider"></li>
                         <li>
+                            <a href="index.phps"><i class="fa fa-fw fa-credit-card"></i> Paid Member: 
+<?php
+include 'free.php';
+if (intval($free) === 1) {
+    echo 'Yes';
+}
+else {
+    echo 'No';
+}
+?>
+                             </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
                             <a href="../log_out.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
@@ -191,8 +209,6 @@ $id = $_SESSION['user_id'];
 
 // Checking for form submissions
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
-    require ('../core/database/animal_connect.php'); // Connecting to the database
     
     $errors = array(); // Initializing an error array
 

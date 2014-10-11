@@ -1,6 +1,11 @@
 <?php 
+error_reporting(0);
 $page_title = "Home | Farm Recorder | Making Farm Managment Easy";
 include '../core/init.php';
+$id = $_SESSION['user_id'];
+require '../core/database/connect.php';
+require '../core/database/connect_free.php';
+require '../core/database/animal_connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -136,6 +141,20 @@ include '../core/init.php';
                         </li>
                         <li class="divider"></li>
                         <li>
+                            <a href="index.phps"><i class="fa fa-fw fa-credit-card"></i> Paid Member: 
+<?php
+include 'free.php';
+if (intval($free) === 1) {
+    echo 'Yes';
+}
+else {
+    echo 'No';
+}
+?>
+                             </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
                             <a href="../log_out.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
@@ -182,10 +201,6 @@ include '../core/init.php';
 <?php 
 $tag_number = $_GET['tag_number'];
 echo '<b>Tag Number: </b>' . $tag_number . '<br/>';
-
-
-require ('../core/database/animal_connect.php'); // Connecting to the database
-$id = $_SESSION['user_id'];
 
 // Making the query
 $q = "SELECT CONCAT(tag_number) AS tn, CONCAT(breed) AS b, CONCAT(mother_tag_number) AS mtn, CONCAT(ram_number) AS rn, CONCAT(note) AS n, CONCAT(dead) AS alive FROM test_1234 WHERE `user_id` = $id AND `dead` = '0' AND `tag_number` = '$tag_number' ORDER BY tag_number ASC";

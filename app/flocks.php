@@ -3,7 +3,9 @@ error_reporting(0);
 $page_title = "Home | Farm Recorder | Making Farm Managment Easy";
 include '../core/init.php';
 $id = $_SESSION['user_id'];
-require ('../core/database/animal_connect.php'); // Connecting to the database
+require '../core/database/connect.php';
+require '../core/database/connect_free.php';
+require '../core/database/animal_connect.php';
 
     // Registering user into database    
     // Making the query
@@ -153,6 +155,20 @@ require ('../core/database/animal_connect.php'); // Connecting to the database
                     <ul class="dropdown-menu">
                         <li>
                             <a href="index.phps"><i class="fa fa-fw fa-gear"></i> Dashboard</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="index.phps"><i class="fa fa-fw fa-credit-card"></i> Paid Member: 
+<?php
+include 'free.php';
+if (intval($free) === 1) {
+    echo 'Yes';
+}
+else {
+    echo 'No';
+}
+?>
+                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>

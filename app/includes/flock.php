@@ -42,8 +42,6 @@ while ($row5 = mysqli_fetch_array($r5, MYSQLI_ASSOC)) {
                     <div class="col-lg-12">
                         <div class="table-responsive">
 <?php
-require ('../core/database/animal_connect.php'); // Connecting to the database
-$id = $_SESSION['user_id'];
 $flock_number = $_GET['number'];
 
 // Making the query

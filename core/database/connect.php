@@ -6,4 +6,5 @@ $connect_error = 'Sorry, we\'ve run into a problem. It\'ll be fixed soon.';
 
 mysql_connect('localhost', 'root', '') or die($connect_error);
 mysql_select_db('phplogin');
+$dbc = @mysqli_connect (DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 ?>
