@@ -32,7 +32,9 @@ while ($row5 = mysqli_fetch_array($r5, MYSQLI_ASSOC)) {
                                 <li>
                                 </li>
                                 <li  class="active"><a href="flock.php?rename=1">Rename Flocks</a>
-                                </li>                            
+                                </li>
+                                <li  class="active" style="margin-left: 10px;"><a href="includes/flock_setup.php">Set Up / Reset Flocks</a>
+                                </li>                          
                             </ul>
                         <!--/.nav-collapse -->
                     </div>

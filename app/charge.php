@@ -216,12 +216,12 @@ try {
   ));
 
 $q_stripe = "UPDATE `users` SET `free` = '1' WHERE `user_id` = '$id';";
-$r_stripe = @mysqli_query ($dbc, $q_stripe); // Run the query
+$r_stripe = @mysqli_query ($dbc_free, $q_stripe); // Run the query
 
 }catch(Stripe_CardError $e) {
     // DO somethign
 }
-header("Location: index.php");
+header("Location: index.php?paid_member=yes");
 exit();
 
 ?>

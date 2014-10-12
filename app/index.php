@@ -215,6 +215,10 @@ else {
                         <div class="table-responsive">
 <?php
 
+if ($_GET['paid_member'] === 'yes'){
+    echo "<p style=\"color: red;\">Congrats!!! You're now a paid member!!!</p>";
+}
+
 // Making the query
 $q = "SELECT CONCAT(tag_number) AS tn, CONCAT(mother_tag_number) AS mtn, CONCAT(ram_number) AS rn, CONCAT(note) AS n FROM test_1234 WHERE `user_id` = $id AND `dead` = '0' ORDER BY tag_number ASC";
 $r = @mysqli_query($dbc, $q); // Running the query

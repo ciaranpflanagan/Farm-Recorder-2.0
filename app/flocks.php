@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 $page_title = "Home | Farm Recorder | Making Farm Managment Easy";
 include '../core/init.php';
 $id = $_SESSION['user_id'];
@@ -249,6 +248,8 @@ while ($row5 = mysqli_fetch_array($r5, MYSQLI_ASSOC)) {
                                 </li>
                                 <li  class="active"><a href="flock.php?rename=1">Rename Flocks</a>
                                 </li>
+                                <li  class="active" style="margin-left: 10px;"><a href="includes/flock_setup.php">Set Up / Reset Flocks</a>
+                                </li>
                             </ul>
                         <!--/.nav-collapse -->
                     </div>
@@ -297,7 +298,7 @@ if ($num > 0) {
 else
 {
     // Public message
-    echo '<p>We can\'t display your animals because you haven\'t put any in this flock.>here</a>.</p>';
+    echo '<p>We can\'t display your animals because you haven\'t put any in this flock.</p>';
     
     // Debugging message
     // echo '<p>' . mysqli_error($dbc) . '<br/><br/>Query: ' . $q . '</p>';
